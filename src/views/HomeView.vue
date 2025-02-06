@@ -29,6 +29,17 @@
           <el-icon class="el-icon--upload"><upload-filled /></el-icon>
           <div class="el-upload__text">Drop file here or <em>click to upload</em></div>
         </el-upload>
+        <div>车辆视频</div>
+        <el-upload
+          class="upload-demo"
+          drag
+          action="/gov_api/upload2"
+          :on-success="handleUploadSuccess3"
+          multiple
+        >
+          <el-icon class="el-icon--upload"><upload-filled /></el-icon>
+          <div class="el-upload__text">Drop file here or <em>click to upload</em></div>
+        </el-upload>
       </el-col>
       <el-col :span="12">
         <div>图片预测</div>
@@ -52,6 +63,16 @@
             controls
           />
         </div>
+        <div>车流量统计</div>
+        <div>
+          <video
+            v-for="(item, index) in uploadList3"
+            :key="index"
+            class="show-container"
+            :src="item.path"
+            controls
+          />
+        </div>
       </el-col>
     </el-row>
   </div>
@@ -65,6 +86,7 @@ const uploadList = ref([])
 
 const fileList2 = ref([])
 const uploadList2 = ref([])
+const uploadList3 = ref([])
 const summary = ref([])
 // 上传成功回调
 function handleUploadSuccess(res, file) {
@@ -77,6 +99,11 @@ function handleUploadSuccess(res, file) {
 function handleUploadSuccess2(res, file) {
   if (res.code === 200) {
     uploadList2.value.push({ path: res.file_path })
+  }
+}
+function handleUploadSuccess3(res, file) {
+  if (res.code === 200) {
+    uploadList3.value.push({ path: res.file_path })
   }
 }
 const clear = () => {
