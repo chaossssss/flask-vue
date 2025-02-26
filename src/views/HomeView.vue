@@ -41,6 +41,16 @@
           <div class="el-upload__text">Drop file here or <em>click to upload</em></div>
         </el-upload>
         <div>车祸视频</div>
+        <el-upload
+          class="upload-demo"
+          drag
+          action="/gov_api/upload3"
+          :on-success="handleUploadSuccess4"
+          multiple
+        >
+          <el-icon class="el-icon--upload"><upload-filled /></el-icon>
+          <div class="el-upload__text">Drop file here or <em>click to upload</em></div>
+        </el-upload>
       </el-col>
       <el-col :span="12">
         <div>图片预测</div>
@@ -103,6 +113,11 @@ function handleUploadSuccess2(res, file) {
   }
 }
 function handleUploadSuccess3(res, file) {
+  if (res.code === 200) {
+    uploadList3.value.push({ path: res.file_path })
+  }
+}
+function handleUploadSuccess4(res, file) {
   if (res.code === 200) {
     uploadList3.value.push({ path: res.file_path })
   }
